@@ -19,7 +19,8 @@ export const loginRequest = {
     "User.Read",       // datos básicos de usuario
     "Mail.Read",       // correos
     "Calendars.Read",  // calendario
-    "User.ReadBasic.All" // para ver otros usuarios en la org -> se puede ver a toda la gente de la u xd
+    "User.ReadBasic.All", // para ver otros usuarios en la org -> se puede ver a toda la gente de la u xd
+    "api://3d7c6395-07ae-461b-82fb-4776ba1af653/access"
   ]
 };
 

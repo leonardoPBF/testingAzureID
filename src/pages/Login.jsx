@@ -16,6 +16,7 @@ export default function Login() {
         console.log("Token:", response.accessToken);
 
         sessionStorage.setItem("token", response.accessToken);
+
         navigate("/profileUser");
       }
     } catch (error) {
