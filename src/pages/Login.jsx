@@ -11,11 +11,24 @@ export default function Login() {
     try {
       const response = await instance.loginPopup(loginRequest);
 
-      if (response && response.account) {
-        console.log("Usuario:", response.account);
-        console.log("Token:", response.accessToken);
+            if (response && response.account) {
+        instance.setActiveAccount(response.account);
 
-        sessionStorage.setItem("token", response.accessToken);
+        console.log("Usuario:", response.account);
+
+        // 2. Token para Microsoft Graph
+        const graphToken = await instance.acquireTokenSilent({
+          scopes: ["User.Read", "Mail.Read", "Calendars.Read"],
+          account: response.account,
+        });
+        console.log("Graph Token:", graphToken.accessToken);
+
+        // 3. Token para tu API
+        const apiToken = await instance.acquireTokenSilent({
+          scopes: ["api://3d7c6395-07ae-461b-82fb-4776ba1af653/access"],
+          account: response.account,
+        });
+        console.log("API Token:", apiToken.accessToken);
 
         navigate("/profileUser");
       }
