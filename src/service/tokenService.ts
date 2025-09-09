@@ -1,16 +1,22 @@
 import { IPublicClientApplication } from "@azure/msal-browser";
 import { loginRequest, loginRequestBack } from "../authConfig";
 
-export async function getGraphToken(msalInstance: IPublicClientApplication) {
+async function acquireToken(msalInstance: IPublicClientApplication, request: any) {
   const account = msalInstance.getActiveAccount();
   if (!account) throw Error("No active account");
 
-  return msalInstance.acquireTokenSilent(loginRequest);
+  const response = await msalInstance.acquireTokenSilent({
+    ...request,
+    account,
+  });
+
+  return response.accessToken;
+}
+
+export async function getGraphToken(msalInstance: IPublicClientApplication) {
+  return acquireToken(msalInstance, loginRequest);
 }
 
 export async function getApiToken(msalInstance: IPublicClientApplication) {
-  const account = msalInstance.getActiveAccount();
-  if (!account) throw Error("No active account");
-
-  return msalInstance.acquireTokenSilent(loginRequestBack);
+  return acquireToken(msalInstance, loginRequestBack);
 }
