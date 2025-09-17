@@ -18,7 +18,6 @@ export default function ProfileUser() {
   const isLoading = apiLoading || graphLoading;
   const error = apiError || graphError;
 
-  // Use Graph data as primary source, API data as secondary
   const userData = graphData;
 
   const handleNavigateToMails = () => {

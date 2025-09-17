@@ -31,14 +31,20 @@ export default function Login() {
         });
         console.log("🔒 API Token:", apiToken.accessToken);
 
-        // Opcional: si quieres enviarlos al backend
-        // await fetch("/api/protected", {
-        //   method: "POST",
-        //   headers: { Authorization: `Bearer ${apiToken.accessToken}` },
-        //   body: JSON.stringify({ graphToken: graphToken.accessToken }),
-        // });
+          const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:7071';
 
-        navigate("/profileUser");
+        const responseLogin = await fetch( baseUrl+"/api/login/hookLogin", {
+          method: "POST",
+          headers: { Authorization: `Bearer ${apiToken.accessToken}` },
+          body: JSON.stringify({ graphToken: graphToken.accessToken }),
+        });
+
+        if (responseLogin.ok){
+          navigate("/profileUser");
+        } else {
+          console.error("❌ Error en /api/hookLogin:", responseLogin.statusText);
+        }
+        
       }
     } catch (error) {
       console.error("❌ Error al iniciar sesión:", error);

@@ -12,7 +12,6 @@ export function useCombinedAuth(msalInstance: any) {
         getGraphToken(msalInstance)
       ]);
 
-      // Get user info from both Graph and your API
       const [graphUser, apiUser] = await Promise.all([
         GraphService.getMe(graphToken),
         ApiService.getUser(apiToken, msalInstance)
