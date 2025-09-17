@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
-import ExampleMail from "./pages/GraphServiceExamples/mailuser";
+import ExampleMail from "./pages/GraphServiceExamples/mailUser";
 import ProfileUser from "./pages/profileUser";
 
 function App() {
