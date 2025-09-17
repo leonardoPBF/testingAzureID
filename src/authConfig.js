@@ -4,7 +4,9 @@ export const msalConfig = {
   auth: {
     clientId: "3d7c6395-07ae-461b-82fb-4776ba1af653",
     authority: "https://login.microsoftonline.com/98201fef-d9f6-4e68-84f5-c2705074e342",
-    redirectUri: "http://localhost:5173",
+    redirectUri: import.meta.env.PROD
+      ? "https://gentle-cliff-0a650cc0f.2.azurestaticapps.net/"
+      : "http://localhost:5173"
   },
   cache: {
     cacheLocation: "sessionStorage", 
